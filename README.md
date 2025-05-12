@@ -28,8 +28,9 @@ Get-ADDBAccount -All -DBPath '.\Active Directory\ntds.dit' -BootKey $key | Forma
 ```
 
 ## Step 4: Compare AD Hashes to HIBP password list
-Download altered Match-ADHashes.ps1 from here. I just altered the output slightly.
+Download altered CompareADHashes.ps1 from here. 
 Open PowerShell as administrator and run the following:
 ```
-
+Import .\CompareADHashes.ps1
+CompareADHashes -ADHashes hashes.txt -HashDictionary pwnedpasswords.txt | Out-File PasswordAudit.csv
 ```
