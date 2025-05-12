@@ -25,7 +25,7 @@ This password audit requires NTLM hashes and may take time to download (requires
 > [!TIP]
 > Change current directory into workspace directory like `cd C:\temp\audit`
 
-Make sure you have DSInternals installed from [here](https://github.com/MichaelGrafnetter/DSInternals) or if you a running Powershell 5 `Install-Module -Name DSInternals -Force`.
+Make sure you have DSInternals installed from [here](https://github.com/MichaelGrafnetter/DSInternals?tab=readme-ov-file#downloads) or if you a running Powershell 5 `Install-Module -Name DSInternals -Force`.\
 Open PowerShell as administrator and run the following:
 ```
 $key = Get-BootKey -SystemHivePath .\registry\SYSTEM
@@ -39,3 +39,11 @@ Open PowerShell as administrator and run the following:
 Import-Module c:\temp\audit\CompareADHashes.ps1
 Compare-ADHashes -ADHashes "C:\temp\audit\hashes.txt" -HashDictionary "C:\temp\audit\pwnedpasswords_ntlm.txt" | Export-Csv "C:\temp\audit\output.csv" -NoTypeInformation
 ```
+
+## Step 5: Remove Critical Files
+Regardless of the results, it's critical to securely delete both the `ADHashes.txt`, `NTDS.dit`, and `SYSTEM` files immediately after you're done. These files contain sensitive information, and if they fall into the wrong hands, they could lead to serious security or legal consequences.\
+Using Sysinternals' [SDelete](https://docs.microsoft.com/en-us/sysinternals/downloads/sdelete) and run the following:
+```
+.\sdelete.exe -p 7 -r -s <DIRECTORY OR FILE>
+```
+
