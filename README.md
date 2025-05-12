@@ -15,6 +15,11 @@ ntdsutil: quit
 ## Step 2: Download the HIBP hash list using PwnedPasswordsDownloader
 Follow instructions to download recent HIBP Offline NTLM password list:
 [PwnedPasswordsDownloader](https://github.com/HaveIBeenPwned/PwnedPasswordsDownloader)
+This password audit requires NTLM hashes.
+> Download all NTLM hashes to a single txt file called pwnedpasswords_ntlm.txt
+`haveibeenpwned-downloader.exe -n pwnedpasswords_ntlm`
+
+
 
 ## Step 3: Convert hashes in ntds.dit file to Hashcat formatting
 > [!TIP]
@@ -28,7 +33,7 @@ Get-ADDBAccount -All -DBPath '.\Active Directory\ntds.dit' -BootKey $key | Forma
 ```
 
 ## Step 4: Compare AD Hashes to HIBP password list
-Download altered CompareADHashes.ps1 from here. 
+Download CompareADHashes.ps1 from here. 
 Open PowerShell as administrator and run the following:
 ```
 Import .\CompareADHashes.ps1
