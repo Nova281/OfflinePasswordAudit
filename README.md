@@ -23,7 +23,7 @@ This password audit requires NTLM hashes and may take time to download (requires
 
 ## Step 3: Convert hashes in ntds.dit file to Hashcat formatting
 > [!TIP]
-> Change current directory into workspace directory like `cd c:\temp\audit`
+> Change current directory into workspace directory like `cd C:\temp\audit`
 
 Make sure you have DSInternals installed from here or if you a running Powershell 5 `Install-Module -Name DSInternals -Force`.
 Open PowerShell as administrator and run the following:
@@ -36,6 +36,6 @@ Get-ADDBAccount -All -DBPath '.\Active Directory\ntds.dit' -BootKey $key | Forma
 Download CompareADHashes.ps1 from here. 
 Open PowerShell as administrator and run the following:
 ```
-Import .\CompareADHashes.ps1
-CompareADHashes -ADHashes hashes.txt -HashDictionary pwnedpasswords_ntlm | Out-File PasswordAudit.csv
+Import-Module c:\temp\audit\CompareADHashes.ps1
+Compare-ADHashes -ADHashes "C:\temp\audit\hashes.txt" -HashDictionary "C:\temp\audit\pwnedpasswords_ntlm.txt" | Export-Csv "C:\temp\audit\output.csv" -NoTypeInformation
 ```
