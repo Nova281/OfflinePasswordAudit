@@ -15,7 +15,7 @@ ntdsutil: quit
 ## Step 2: Download the HIBP hash list using PwnedPasswordsDownloader
 Follow instructions to download recent HIBP Offline NTLM password list:
 [PwnedPasswordsDownloader](https://github.com/HaveIBeenPwned/PwnedPasswordsDownloader)
-This password audit requires NTLM hashes.
+This password audit requires NTLM hashes and may take time to download (requires no interruptions).
 > Download all NTLM hashes to a single txt file called pwnedpasswords_ntlm.txt
 `haveibeenpwned-downloader.exe -n pwnedpasswords_ntlm`
 
@@ -37,5 +37,5 @@ Download CompareADHashes.ps1 from here.
 Open PowerShell as administrator and run the following:
 ```
 Import .\CompareADHashes.ps1
-CompareADHashes -ADHashes hashes.txt -HashDictionary pwnedpasswords.txt | Out-File PasswordAudit.csv
+CompareADHashes -ADHashes hashes.txt -HashDictionary pwnedpasswords_ntlm | Out-File PasswordAudit.csv
 ```
