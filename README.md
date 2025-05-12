@@ -25,7 +25,7 @@ This password audit requires NTLM hashes and may take time to download (requires
 > [!TIP]
 > Change current directory into workspace directory like `cd C:\temp\audit`
 
-Make sure you have DSInternals installed from here or if you a running Powershell 5 `Install-Module -Name DSInternals -Force`.
+Make sure you have DSInternals installed from [here](https://github.com/MichaelGrafnetter/DSInternals) or if you a running Powershell 5 `Install-Module -Name DSInternals -Force`.
 Open PowerShell as administrator and run the following:
 ```
 $key = Get-BootKey -SystemHivePath .\registry\SYSTEM
@@ -33,7 +33,7 @@ Get-ADDBAccount -All -DBPath '.\Active Directory\ntds.dit' -BootKey $key | Forma
 ```
 
 ## Step 4: Compare AD Hashes to HIBP password list
-Download CompareADHashes.ps1 from here. 
+Download CompareADHashes.ps1 from [here](https://github.com/Nova281/OfflinePasswordAudit/blob/main/CompareADHashes.ps1). 
 Open PowerShell as administrator and run the following:
 ```
 Import-Module c:\temp\audit\CompareADHashes.ps1
