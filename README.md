@@ -28,15 +28,15 @@ This password audit requires NTLM hashes and may take time to download (requires
 Make sure you have DSInternals installed from [here](https://github.com/MichaelGrafnetter/DSInternals?tab=readme-ov-file#downloads) or if you a running Powershell 5 `Install-Module -Name DSInternals -Force`.\
 Open PowerShell as administrator and run the following (as of DSInternals PowerShell Module 5.3):
 ```
-$key = Get-BootKey -SystemHivePath "C:\temp\registry\SYSTEM"
-Get-ADDBAccount -All -DBPath "C:\temp\Active Directory\ntds.dit" -BootKey $key -View HashcatNT | Out-File C:\temp\hashes.txt -Encoding ASCII
+$key = Get-BootKey -SystemHivePath "C:\temp\audit\registry\SYSTEM"
+Get-ADDBAccount -All -DBPath "C:\temp\audit\Active Directory\ntds.dit" -BootKey $key -View HashcatNT | Out-File C:\temp\hashes.txt -Encoding ASCII
 ```
 
 ## Step 4: Compare AD Hashes to HIBP password list
 Download CompareADHashes.ps1 from [here](https://github.com/Nova281/OfflinePasswordAudit/blob/main/CompareADHashes.ps1). 
 Open PowerShell as administrator and run the following:
 ```
-Import-Module c:\temp\audit\CompareADHashes.ps1
+Import-Module C:\temp\audit\CompareADHashes.ps1
 Compare-ADHashes -ADHashes "C:\temp\audit\hashes.txt" -HashDictionary "C:\temp\audit\pwnedpasswords_ntlm.txt" | Export-Csv "C:\temp\audit\output.csv" -NoTypeInformation
 ```
 
