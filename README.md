@@ -26,10 +26,10 @@ This password audit requires NTLM hashes and may take time to download (requires
 > Change current directory into workspace directory like `cd C:\temp\audit`
 
 Make sure you have DSInternals installed from [here](https://github.com/MichaelGrafnetter/DSInternals?tab=readme-ov-file#downloads) or if you a running Powershell 5 `Install-Module -Name DSInternals -Force`.\
-Open PowerShell as administrator and run the following:
+Open PowerShell as administrator and run the following (as of DSInternals PowerShell Module 5.3):
 ```
-$key = Get-BootKey -SystemHivePath .\registry\SYSTEM
-Get-ADDBAccount -All -DBPath '.\Active Directory\ntds.dit' -BootKey $key | Format-Custom -View HashcatNT | Out-File hashes.txt -Encoding ASCII
+$key = Get-BootKey -SystemHivePath "C:\temp\registry\SYSTEM"
+Get-ADDBAccount -All -DBPath "C:\temp\Active Directory\ntds.dit" -BootKey $key -View HashcatNT | Out-File C:\temp\hashes.txt -Encoding ASCII
 ```
 
 ## Step 4: Compare AD Hashes to HIBP password list
