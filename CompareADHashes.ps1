@@ -1,4 +1,4 @@
-﻿function Compare-ADHashes {
+function Compare-ADHashes {
 <#
 .NAME
     CompareADHashes
@@ -11,7 +11,7 @@
 .PARAMETER HashDictionary
     Path to file containing breached hashes in HASH:count format.
 .EXAMPLE
-    Compare-ADHashes -ADHashes "C:\hashes.txt" -HashDictionary "C:\pwned.txt" | Export-Csv "C:\output.csv" -NoTypeInformation
+    Compare-ADHashes -ADHashes "C:\temp\hashes.txt" -HashDictionary "C:\temp\pwnedpasswords_ntlm.txt" -Verbose -OutputFile "C:\temp\PasswordAudit.csv"
 #>
     [CmdletBinding()]
     param(
@@ -19,7 +19,10 @@
         [string] $ADHashes,
 
         [Parameter(Mandatory = $true)]
-        [string] $HashDictionary
+        [string] $HashDictionary,
+
+        [Parameter(Mandatory = $false)]
+        [string] $OutputFile = "PasswordAudit.csv"
     )
 
     $stopwatch = [System.Diagnostics.Stopwatch]::StartNew()
@@ -55,5 +58,5 @@
     $stopwatch.Stop()
     Write-Verbose "Compare-ADHashes completed in $($stopwatch.Elapsed.TotalSeconds) seconds."
 
-    return $results
+    return ($results | Export-Csv $OutputFile  -NoTypeInformation)
 }
